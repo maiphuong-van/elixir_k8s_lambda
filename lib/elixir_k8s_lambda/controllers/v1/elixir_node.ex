@@ -68,8 +68,8 @@ defmodule ElixirK8sLambda.Controller.V1.ElixirNode do
 
   @scope :namespaced
   @names %{
-    plural: "elixir_nodes",
-    singular: "elixir_node",
+    plural: "elixir-nodes",
+    singular: "elixir-node",
     kind: "ElixirNode",
     shortNames: []
   }

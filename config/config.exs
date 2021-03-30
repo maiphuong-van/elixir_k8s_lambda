@@ -11,7 +11,7 @@ config :k8s,
 config :bonny,
   # Add each CRD Controller module for this operator to load here
   # Defaults to none. This *must* be set.
-  controllers: [],
+  controllers: [ElixirK8sLambda.Controller.V1.ElixirNode],
 
   # K8s.Cluster to use, defaults to :default
   cluster_name: :minikube,
