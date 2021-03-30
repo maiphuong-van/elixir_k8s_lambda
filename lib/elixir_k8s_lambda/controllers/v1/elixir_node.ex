@@ -77,13 +77,42 @@ defmodule ElixirK8sLambda.Controller.V1.ElixirNode do
   # @rule {"", ["pods", "configmap"], ["*"]}
   # @rule {"", ["secrets"], ["create"]}
 
+  @rule {"", ["pods"], ["*"]}
+  @rule {"batch", ["jobs"], ["*"]}
+
   @doc """
   Handles an `ADDED` event
   """
   @spec add(map()) :: :ok | :error
   @impl Bonny.Controller
   def add(%{} = elixir_node) do
-    IO.inspect(elixir_node)
+    %{
+      "apiVersion" => "batch/v1",
+      "kind" => "Job",
+      "metadata" => %{
+        "name" => elixir_node["name"],
+        "labels" => %{"app" => elixir_node["name"]},
+        "namespace" => "default"
+      },
+      "spec" => %{
+        "template" => %{
+          "spec" => %{
+            "containers" => [
+              %{
+                "name" => "hello",
+                "image" => "busybox",
+                "command" => ["sh", "-c", "echo \"Hello, Kubernetes!\" && sleep 3600"]
+              }
+            ],
+            "restartPolicy" => "Never"
+          }
+        }
+      }
+    }
+    |> K8s.Client.create()
+    |> K8s.Client.run(Bonny.Config.cluster_name())
+    |> IO.inspect()
+
     :ok
   end
 
@@ -93,7 +122,6 @@ defmodule ElixirK8sLambda.Controller.V1.ElixirNode do
   @spec modify(map()) :: :ok | :error
   @impl Bonny.Controller
   def modify(%{} = elixir_node) do
-    IO.inspect(elixir_node)
     :ok
   end
 
@@ -103,7 +131,6 @@ defmodule ElixirK8sLambda.Controller.V1.ElixirNode do
   @spec delete(map()) :: :ok | :error
   @impl Bonny.Controller
   def delete(%{} = elixir_node) do
-    IO.inspect(elixir_node)
     :ok
   end
 
@@ -113,7 +140,6 @@ defmodule ElixirK8sLambda.Controller.V1.ElixirNode do
   @spec reconcile(map()) :: :ok | :error
   @impl Bonny.Controller
   def reconcile(%{} = elixir_node) do
-    IO.inspect(elixir_node)
     :ok
   end
 end

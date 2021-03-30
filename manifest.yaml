@@ -144,6 +144,28 @@
       "verbs": [
         "*"
       ]
+    },
+    {
+      "apiGroups": [
+        "batch"
+      ],
+      "resources": [
+        "jobs"
+      ],
+      "verbs": [
+        "*"
+      ]
+    },
+    {
+      "apiGroups": [
+        ""
+      ],
+      "resources": [
+        "pods"
+      ],
+      "verbs": [
+        "*"
+      ]
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+    "apiVersion": "elixir-kubernetes.esl-hackathon.com/v1",
+    "kind": "ElixirNode",
+    "name": "testing",
+    "metadata": {
+        "labels": {
+            "k8s-app": "elixir-kubernetes"
+        },
+        "name": "elixir-kubernetes",
+        "namespace": "default"
+    }
+}
