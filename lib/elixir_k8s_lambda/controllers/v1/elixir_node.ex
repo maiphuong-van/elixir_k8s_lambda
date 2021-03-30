@@ -69,7 +69,7 @@ defmodule ElixirK8sLambda.Controller.V1.ElixirNode do
   @scope :namespaced
   @names %{
     plural: "elixir_nodes",
-    singular: "elixirnode",
+    singular: "elixir_node",
     kind: "ElixirNode",
     shortNames: []
   }
@@ -82,8 +82,8 @@ defmodule ElixirK8sLambda.Controller.V1.ElixirNode do
   """
   @spec add(map()) :: :ok | :error
   @impl Bonny.Controller
-  def add(%{} = elixirnode) do
-    IO.inspect(elixirnode)
+  def add(%{} = elixir_node) do
+    IO.inspect(elixir_node)
     :ok
   end
 
@@ -92,8 +92,8 @@ defmodule ElixirK8sLambda.Controller.V1.ElixirNode do
   """
   @spec modify(map()) :: :ok | :error
   @impl Bonny.Controller
-  def modify(%{} = elixirnode) do
-    IO.inspect(elixirnode)
+  def modify(%{} = elixir_node) do
+    IO.inspect(elixir_node)
     :ok
   end
 
@@ -102,8 +102,8 @@ defmodule ElixirK8sLambda.Controller.V1.ElixirNode do
   """
   @spec delete(map()) :: :ok | :error
   @impl Bonny.Controller
-  def delete(%{} = elixirnode) do
-    IO.inspect(elixirnode)
+  def delete(%{} = elixir_node) do
+    IO.inspect(elixir_node)
     :ok
   end
 
@@ -112,8 +112,8 @@ defmodule ElixirK8sLambda.Controller.V1.ElixirNode do
   """
   @spec reconcile(map()) :: :ok | :error
   @impl Bonny.Controller
-  def reconcile(%{} = elixirnode) do
-    IO.inspect(elixirnode)
+  def reconcile(%{} = elixir_node) do
+    IO.inspect(elixir_node)
     :ok
   end
 end
