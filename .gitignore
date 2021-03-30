@@ -25,3 +25,5 @@ elixir_k8s_lambda-*.tar
 
 # Temporary files for e.g. tests
 /tmp
+
+/priv/kube

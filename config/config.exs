@@ -4,7 +4,7 @@ config :k8s,
   clusters: %{
     # `default` here must match `cluster_name` below
     minikube: %{
-      conn: "~/.kube/config"
+      conn: "priv/kube/config"
     }
   }
 
