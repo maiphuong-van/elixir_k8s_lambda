@@ -8,5 +8,12 @@
         },
         "name": "elixir-kubernetes",
         "namespace": "default"
+    },
+    "command": {
+        "module": "IO",
+        "function": "inspect",
+        "args": [
+            "\"Hello\""
+        ]
     }
 }

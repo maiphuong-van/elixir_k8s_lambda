@@ -86,6 +86,8 @@ defmodule ElixirK8sLambda.Controller.V1.ElixirNode do
   @spec add(map()) :: :ok | :error
   @impl Bonny.Controller
   def add(%{} = elixir_node) do
+    %{"module" => module, "function" => function, "args" => args} = elixir_node["command"]
+
     %{
       "apiVersion" => "batch/v1",
       "kind" => "Job",
@@ -100,8 +102,12 @@ defmodule ElixirK8sLambda.Controller.V1.ElixirNode do
             "containers" => [
               %{
                 "name" => "hello",
-                "image" => "busybox",
-                "command" => ["sh", "-c", "echo \"Hello, Kubernetes!\" && sleep 3600"]
+                "image" => "bitwalker/alpine-elixir:1.11.3",
+                "command" => [
+                  "elixir",
+                  "-e",
+                  "#{module}.#{function}(#{Enum.join(args, ",")})"
+                ]
               }
             ],
             "restartPolicy" => "Never"
