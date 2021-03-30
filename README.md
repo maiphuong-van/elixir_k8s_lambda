@@ -1,5 +1,7 @@
 # ElixirK8sLambda
 
+The grand idea of us was to create a Kubernetes controller to dispacth and scheduler Elixir Jobs. With the limited time and K8S knowledge we had, we manage to create a controller than when you add resource, it will run the Elixir code that is given in the YAML/JSON file.
+
 ## Tools
 - Minikube
 - Kubectl
@@ -11,8 +13,8 @@ First, run these command to build the Docker Image
 ```
 eval $(minikube docker-env)
 
-export NOTSURE_IMAGE=elixir-lambda
-docker build -t ${NOTSURE_IMAGE} .
+export NOTSURES_IMAGE=elixir-lambda
+docker build -t ${NOTSURES_IMAGE} .
 ```
 
 Apply the `manifest.yaml` file
