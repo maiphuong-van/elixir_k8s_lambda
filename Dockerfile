@@ -33,6 +33,7 @@ RUN apk add --update openssl ncurses
 
 WORKDIR /app
 COPY --from=builder /app/_build/prod/rel/elixir_k8s_lambda ./
+COPY --from=builder /app/priv ./
 RUN chown -R nobody: /app
 
 ENTRYPOINT ["/app/bin/elixir_k8s_lambda"]

@@ -1,5 +1,96 @@
 ---
 {
+  "apiVersion": "apps/v1",
+  "kind": "Deployment",
+  "metadata": {
+    "labels": {
+      "k8s-app": "elixir-kubernetes"
+    },
+    "name": "elixir-kubernetes",
+    "namespace": "default"
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "matchLabels": {
+        "k8s-app": "elixir-kubernetes"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "k8s-app": "elixir-kubernetes"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "env": [
+              {
+                "name": "MIX_ENV",
+                "value": "prod"
+              },
+              {
+                "name": "BONNY_POD_NAME",
+                "valueFrom": {
+                  "fieldRef": {
+                    "fieldPath": "metadata.name"
+                  }
+                }
+              },
+              {
+                "name": "BONNY_POD_NAMESPACE",
+                "valueFrom": {
+                  "fieldRef": {
+                    "fieldPath": "metadata.namespace"
+                  }
+                }
+              },
+              {
+                "name": "BONNY_POD_IP",
+                "valueFrom": {
+                  "fieldRef": {
+                    "fieldPath": "status.podIP"
+                  }
+                }
+              },
+              {
+                "name": "BONNY_POD_SERVICE_ACCOUNT",
+                "valueFrom": {
+                  "fieldRef": {
+                    "fieldPath": "spec.serviceAccountName"
+                  }
+                }
+              }
+            ],
+            "image": "elixir-lambda",
+            "imagePullPolicy": "Never",
+            "name": "elixir-kubernetes",
+            "resources": {
+              "limits": {
+                "cpu": "200m",
+                "memory": "200Mi"
+              },
+              "requests": {
+                "cpu": "200m",
+                "memory": "200Mi"
+              }
+            },
+            "securityContext": {
+              "allowPrivilegeEscalation": false,
+              "readOnlyRootFilesystem": true,
+              "runAsNonRoot": true,
+              "runAsUser": 65534
+            }
+          }
+        ],
+        "serviceAccountName": "elixir-kubernetes"
+      }
+    }
+  }
+}
+---
+{
   "apiVersion": "apiextensions.k8s.io/v1beta1",
   "kind": "CustomResourceDefinition",
   "metadata": {
